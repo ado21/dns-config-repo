@@ -22,6 +22,9 @@ jobs:
   check-modified-files:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Check for modified files
         id: modified-files
         run: |
@@ -30,7 +33,7 @@ jobs:
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
           echo "Modified files:"
           cat modified-files.txt
-          echo "::set-output name=modified_files::$(cat modified-files.txt)"
+          echo "modified_files=$(cat modified-files.txt)" >> $GITHUB_ENV
 
   eu-west-1:
     runs-on: ubuntu-latest
