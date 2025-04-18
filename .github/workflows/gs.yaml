@@ -12,13 +12,11 @@ on:
         description: 'Select the region to run'
         required: true
         default: 'eu-west-1'
-        type: array
-        items:
-          type: string
-          enum:
-            - 'eu-west-1'
-            - 'eu-central-1'
-            - 'us-west-2'
+        type: choice
+        options:
+          - 'eu-west-1'
+          - 'eu-central-1'
+          - 'us-west-2'
 
 jobs:
   check-modified-files:
