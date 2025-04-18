@@ -12,7 +12,7 @@ on:
         description: 'Select the region to run'
         required: true
         default: 'eu-west-1'
-        type: choice
+        type: array
         options:
           - 'eu-west-1'
           - 'eu-central-1'
