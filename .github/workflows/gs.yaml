@@ -1,20 +1,38 @@
 name: GS organization
 
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - "GS/eu-west-1/**"   # Trigger only if files in src/eu-west-1/ are modified
+      - "GS/eu-central-1/**"  # Trigger only if files in src/eu-central-1/ are modified
+      - "GS/us-west-2/**"   # Trigger only if files in src/us-west-2/ are modified
+  workflow_dispatch:  # Allow manual triggering of the workflow
+    inputs:
+      region:
+        description: 'Select the region to run'
+        required: true
+        default: 'eu-west-1'
+        type: choice
+        options:
+          - 'eu-west-1'
+          - 'eu-central-1'
+          - 'us-west-2'
 
 jobs:
   eu-west-1:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && contains(join(github.event.head_commit.modified, ','), 'src/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
     steps:
-      - name: Hello world
-        run: echo "Hello world from GS!"
+      - name: Hello world from eu-west-1
+        run: echo "Hello world from GS! (eu-west-1)"
+
   eu-central-1:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && contains(join(github.event.head_commit.modified, ','), 'src/eu-central-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-central-1') }}
     steps:
-      - name: Hello world
-        run: echo "Hello world from GS!"
+      - name: Hello world from eu-central-1
+        run: echo "Hello world from GS! (eu-central-1)"
+
   us-west-2:
     runs-on: ubuntu-latest
-    steps:
-      - name: Hello world
-        run: echo "Hello world from GS!"
+    if: ${{ github.event_name == 'push' && contains(join(github.event.head_commit.modified, ','), 'src/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == '
