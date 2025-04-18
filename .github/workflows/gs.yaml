@@ -13,10 +13,12 @@ on:
         required: true
         default: 'eu-west-1'
         type: array
-        options:
-          - 'eu-west-1'
-          - 'eu-central-1'
-          - 'us-west-2'
+        items:
+          type: string
+          enum:
+            - 'eu-west-1'
+            - 'eu-central-1'
+            - 'us-west-2'
 
 jobs:
   check-modified-files:
