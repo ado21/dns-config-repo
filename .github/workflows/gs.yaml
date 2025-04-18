@@ -45,9 +45,7 @@ jobs:
           
           # Convert list of modified files to a single string, using comma as delimiter
           modified_files=$(cat modified-files.txt | tr '\n' ',' | sed 's/,$//')
-          echo $modified_files
-
-          echo "som tu"
+          echo "Converted list of modified files into one string: $modified_files"
 
           # Set the modified files as output
           echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
