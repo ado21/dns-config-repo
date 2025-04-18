@@ -30,6 +30,10 @@ jobs:
 
           git fetch --depth=2
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
+          
+          echo "Modified files in last commit:"
           cat modified-files.txt
+
+          echo "Make list of modified files available as output ..."
           modified_files=$(tr '\n' ',' < modified-files.txt | sed 's/,$//')
           echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
