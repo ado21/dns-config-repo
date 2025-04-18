@@ -37,5 +37,5 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && contains(join(github.event.head_commit.modified, ','), 'src/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'us-west-2') }}
     steps:
-      - name: Hello world from eu-west-2
-        run: echo "Hello world from GS! (eu-west-2)"
+      - name: Hello world from us-west-2
+        run: echo "Hello world from GS! (us-west-2)"
