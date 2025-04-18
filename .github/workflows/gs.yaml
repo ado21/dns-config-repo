@@ -44,7 +44,7 @@ jobs:
           cat modified-files.txt
           
           # Set the modified files as an environment variable
-          echo "modified_files=$(cat modified-files.txt)" >> $GITHUB_ENV
+          echo "modified_files=$(cat modified-files.txt)" >> $GITHUB_OUTPUT
 
   eu-west-1:
     runs-on: ubuntu-latest
