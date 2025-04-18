@@ -23,6 +23,14 @@ jobs:
           echo "Before: ${{ github.event.before }}"
           echo "After: ${{ github.event.after }}"
 
+          # Check if either 'before' or 'after' is empty
+          if [ -z "${{ github.event.before }}" ] || [ -z "${{ github.event.after }}" ]; then
+            echo "Either 'before' or 'after' commit is empty, skipping this job"
+            exit 0
+          fi
+
+          echo "som tu"
+
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
           cat modified-files.txt
           modified_files=$(tr '\n' ',' < modified-files.txt | sed 's/,$//')
