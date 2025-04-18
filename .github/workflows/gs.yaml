@@ -27,23 +27,53 @@ jobs:
           echo "GitHub event:"
           echo '${{ toJson(github.event) }}'
 
+  check-modified-files:
+    runs-on: ubuntu-latest
+    outputs:
+      region: ${{ steps.set-region.outputs.region }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get modified files
+        id: modified-files
+        run: |
+          # Get the list of files modified in the commit
+          modified_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "Modified files: $modified_files"
+          echo "MODIFIED_FILES=$modified_files" >> $GITHUB_ENV
+
+      - name: Set region based on modified files
+        id: set-region
+        run: |
+          if echo "$MODIFIED_FILES" | grep -q "^GS/eu-west-1/"; then
+            echo "Region: eu-west-1" >> $GITHUB_ENV
+          elif echo "$MODIFIED_FILES" | grep -q "^GS/eu-central-1/"; then
+            echo "Region: eu-central-1" >> $GITHUB_ENV
+          elif echo "$MODIFIED_FILES" | grep -q "^GS/us-west-2/"; then
+            echo "Region: us-west-2" >> $GITHUB_ENV
+          else
+            echo "No region-specific config file modified"
+            exit 0  # No region to deploy if no specific region files are modified
+          fi
+
   eu-west-1:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && contains(toJson(github.event.head_commit.added), 'GS/eu-west-1/') || contains(toJson(github.event.head_commit.modified), 'GS/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
+    if: ${{ env.REGION == 'eu-west-1' }}
     steps:
       - name: Hello world from eu-west-1
         run: echo "Hello world from GS! (eu-west-1)"
 
   eu-central-1:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && contains(toJson(github.event.head_commit.added), 'GS/eu-central-1/') || contains(toJson(github.event.head_commit.modified), 'GS/eu-central-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-central-1') }}
+    if: ${{ env.REGION == 'eu-central-1' }}
     steps:
       - name: Hello world from eu-central-1
         run: echo "Hello world from GS! (eu-central-1)"
 
   us-west-2:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && contains(toJson(github.event.head_commit.added), 'GS/us-west-2/') || contains(toJson(github.event.head_commit.modified), 'GS/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'us-west-2') }}
+    if: ${{ env.REGION == 'us-west-2' }}
     steps:
       - name: Hello world from us-west-2
         run: echo "Hello world from GS! (us-west-2)"
