@@ -24,11 +24,10 @@ jobs:
             echo "Skipping this job, manual trigger was used."
             exit 0
           else
-            echo "Before: ${{ github.event.before }}"
-            echo "After: ${{ github.event.after }}"
+            echo "Commit Before: ${{ github.event.before }}"
+            echo "Commit After: ${{ github.event.after }}"
           fi
 
-          echo "som tu"
           git fetch --depth=2
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
           cat modified-files.txt
