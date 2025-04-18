@@ -23,16 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Check for modified files
+      - name: Get the list of modified files
         id: modified-files
         run: |
-          # Get the list of modified files
-          git fetch origin ${{ github.event.after }}
+          # Ensure we fetch the latest commit and refs
+          git fetch --depth=2
+          echo "Fetching commit history"
+          echo "Before: ${{ github.event.before }}"
+          echo "After: ${{ github.event.after }}"
+
+          # Get the modified files using the commit hashes from the event
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
+          
+          # Output the list of modified files
           echo "Modified files:"
           cat modified-files.txt
+          
+          # Set the modified files as an environment variable
           echo "modified_files=$(cat modified-files.txt)" >> $GITHUB_ENV
 
   eu-west-1:
