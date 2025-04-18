@@ -20,6 +20,7 @@ on:
 
 jobs:
   check-modified-files:
+    if: github.event_name == 'push'
     uses: ./.github/workflows/check-modified-files.yaml
 
   eu-west-1:
