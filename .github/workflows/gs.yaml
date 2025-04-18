@@ -43,6 +43,9 @@ jobs:
           echo "Modified files:"
           cat modified-files.txt
           
+          # Convert list of modified files to a single string, using comma as delimiter
+          modified_files=$(cat modified-files.txt | tr '\n' ',')
+          
           # Set the modified files as output
           echo "modified_files=$(cat modified-files.txt)" >> $GITHUB_OUTPUT
 
