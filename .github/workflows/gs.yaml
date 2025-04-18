@@ -47,6 +47,8 @@ jobs:
           modified_files=$(cat test | tr '\n' ',' | sed 's/,$//')
           echo $modified-files
 
+          echo "som tu"
+
           # Set the modified files as output
           echo "$modified_files" >> $GITHUB_OUTPUT
 
