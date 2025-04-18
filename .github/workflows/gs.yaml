@@ -44,7 +44,7 @@ jobs:
           cat modified-files.txt
           
           # Convert list of modified files to a single string, using comma as delimiter
-          modified_files=$(cat test | tr '\n' ',' | sed 's/,$//')
+          modified_files=$(cat modified-files.txt | tr '\n' ',' | sed 's/,$//')
           echo $modified_files
 
           echo "som tu"
