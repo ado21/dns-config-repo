@@ -19,6 +19,12 @@ on:
           - 'us-west-2'
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug GitHub event
+        run: echo "GitHub event: ${{ toJson(github.event) }}"
+
   eu-west-1:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && contains(github.event.head_commit.modified, 'GS/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
