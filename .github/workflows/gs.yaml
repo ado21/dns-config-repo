@@ -21,7 +21,7 @@ on:
 jobs:
   eu-west-1:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && contains(join(github.event.head_commit.modified, ','), 'GS/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
+    if: ${{ github.event_name == 'push' && ccontains(github.event.head_commit.modified, 'GS/eu-west-1/'), 'GS/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
     steps:
       - name: Hello world from eu-west-1
         run: echo "Hello world from GS! (eu-west-1)"
