@@ -1,0 +1,29 @@
+name: Check Modified Files
+
+on:
+  workflow_call:
+    outputs:
+      modified_files:
+        description: "List of modified files"
+        value: ${{ jobs.check-modified-files.outputs.modified_files }}
+
+jobs:
+  check-modified-files:
+    runs-on: ubuntu-latest
+    outputs:
+      modified_files: ${{ steps.get-diff.outputs.modified_files }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get the list of modified files
+        id: get-diff
+        run: |
+          git fetch --depth=2
+          echo "Before: ${{ github.event.before }}"
+          echo "After: ${{ github.event.after }}"
+
+          git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
+          cat modified-files.txt
+          modified_files=$(tr '\n' ',' < modified-files.txt | sed 's/,$//')
+          echo "modified_files=$modified_files" >> $GITHUB_OUTPUT

@@ -20,35 +20,7 @@ on:
 
 jobs:
   check-modified-files:
-    runs-on: ubuntu-latest
-    outputs:
-      modified_files: ${{ steps.get-diff.outputs.modified_files }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Get the list of modified files
-        id: get-diff
-        run: |
-          # Ensure we fetch the latest commit and refs
-          git fetch --depth=2
-          echo "Fetching commit history"
-          echo "Before: ${{ github.event.before }}"
-          echo "After: ${{ github.event.after }}"
-
-          # Get the modified files using the commit hashes from the event
-          git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > modified-files.txt
-          
-          # Output the list of modified files
-          echo "Modified files:"
-          cat modified-files.txt
-          
-          # Convert list of modified files to a single string, using comma as delimiter
-          modified_files=$(cat modified-files.txt | tr '\n' ',' | sed 's/,$//')
-          echo "Converted list of modified files into one string: $modified_files"
-
-          # Set the modified files as output
-          echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
+    uses: ./.github/workflows/reusable-workflow.yaml
 
   eu-west-1:
     runs-on: ubuntu-latest
