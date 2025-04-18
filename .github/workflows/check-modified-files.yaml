@@ -21,7 +21,7 @@ jobs:
         run: |
           # Check if either 'before' or 'after' is empty
           if [ -z "${{ github.event.before }}" ] || [ -z "${{ github.event.after }}" ]; then
-            echo "Either 'before' or 'after' commit is empty, skipping this job"
+            echo "Skipping this job, manual trigger was used."
             exit 0
           else
             echo "Before: ${{ github.event.before }}"
