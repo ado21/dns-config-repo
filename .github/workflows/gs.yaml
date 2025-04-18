@@ -44,10 +44,11 @@ jobs:
           cat modified-files.txt
           
           # Convert list of modified files to a single string, using comma as delimiter
-          modified-files=$(cat modified-files.txt | tr '\n' ',')
+          modified_files=$(cat test | tr '\n' ',' | sed 's/,$//')
+          echo $modified-files
 
           # Set the modified files as output
-          echo "modified_files=$(cat modified-files.txt)" >> $GITHUB_OUTPUT
+          echo "$modified_files" >> $GITHUB_OUTPUT
 
   eu-west-1:
     runs-on: ubuntu-latest
