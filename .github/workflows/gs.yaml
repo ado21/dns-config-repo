@@ -23,7 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Debug GitHub event
-        run: echo "GitHub event ${{ toJson(github.event) }}"
+        run: |
+          echo "GitHub event:"
+          echo '${{ toJson(github.event) }}'
 
   eu-west-1:
     runs-on: ubuntu-latest
