@@ -20,7 +20,7 @@ on:
 
 jobs:
   check-modified-files:
-    uses: ./.github/workflows/reusable/check-modified-files.yaml
+    uses: ./.github/workflows/check-modified-files.yaml
 
   eu-west-1:
     runs-on: ubuntu-latest
