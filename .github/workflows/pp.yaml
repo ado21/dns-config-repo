@@ -22,6 +22,7 @@ jobs:
 
   create-deployer-role:
     runs-on: ubuntu-latest
+    needs: check-modified-files
     steps:
       - name: create the role
         run: |
