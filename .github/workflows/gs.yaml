@@ -3,9 +3,7 @@ name: GS organization
 on:
   push:
     paths:
-      - "GS/eu-west-1/**"   # Trigger if any change happens in GS/eu-west-1/
-      - "GS/eu-central-1/**"  # Trigger if any change happens in GS/eu-central-1/
-      - "GS/us-west-2/**"   # Trigger if any change happens in GS/us-west-2/
+      - "GS/**"   # Trigger if any change happens in GS folder
   workflow_dispatch:  # Allow manual triggering of the workflow
     inputs:
       region:
