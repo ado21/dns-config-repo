@@ -60,9 +60,9 @@ jobs:
         run: |
           echo "Deployer role successfully created ..."
     create-deployer-role-us-west-2:
-    runs-on: ubuntu-latest
-    needs: [get-artifact-us-west-2]
-    steps:
-      - name: create the role
-        run: |
-          echo "Deployer role successfully created ..."
+      runs-on: ubuntu-latest
+      needs: [get-artifact-us-west-2]
+      steps:
+        - name: create the role
+          run: |
+            echo "Deployer role successfully created ..."
