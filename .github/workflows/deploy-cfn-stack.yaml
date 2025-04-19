@@ -1,0 +1,20 @@
+name: Deploy CloudFormation Stack
+
+on:
+  workflow_call:
+    inputs:
+      region:
+        required: true
+        type: string
+
+jobs:
+  deploy-cfn-stack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Deploy CFN Stack
+        run: |
+          echo "Deploying CFN Stack for region ${{ inputs.region }} ..."
+          echo "CFN Stack successfully deployed in region ${{ inputs.region }}."
