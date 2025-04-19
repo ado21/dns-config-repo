@@ -45,18 +45,21 @@ jobs:
       region: us-west-2
 
   create-deployer-role-eu-west-1:
+    name: eu-west-1
     uses: ./.github/workflows/create-deployer-role.yaml
     needs: [get-artifact-eu-west-1]
     with:
       region: eu-west-1
 
   create-deployer-role-eu-central-1:
+    name: eu-central-1
     uses: ./.github/workflows/create-deployer-role.yaml
     needs: [get-artifact-eu-central-1]
     with:
       region: eu-central-1
 
   create-deployer-role-us-west-2:
+    name: us-west-2
     uses: ./.github/workflows/create-deployer-role.yaml
     needs: [get-artifact-us-west-2]
     with:
