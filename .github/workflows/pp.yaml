@@ -34,7 +34,7 @@ jobs:
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/eu-central-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-central-1') }}
     steps:
       - name: Hello world from eu-central-1
-        run: echo "Hello world from PP! (eu-central-1)"
+        run: echo "Artifact Successfully retrieved ..."
 
   get-artifact-us-west-2:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'us-west-2') }}
     steps:
       - name: Hello world from us-west-2
-        run: echo "Hello world from PP! (us-west-2)"
+        run: echo "Artifact Successfully retrieved ..."
 
   create-deployer-role-eu-west-1:
     runs-on: ubuntu-latest
