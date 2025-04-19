@@ -1,4 +1,4 @@
-name: GS organization - Prod
+name: GS organization
 
 on:
   push:
