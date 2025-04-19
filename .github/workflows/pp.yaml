@@ -32,10 +32,13 @@ jobs:
         run: echo "Proceeding with region ${{ matrix.region }}"
 
       - name: Get Artifact for ${{ matrix.region }}
+        if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/${{ matrix.region }}/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == matrix.region) }}
         run: echo "Artifact successfully retrieved for region ${{ matrix.region }}"
 
       - name: Create Deployer Role for ${{ matrix.region }}
+        if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/${{ matrix.region }}/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == matrix.region) }}
         run: echo "Deployer role successfully created for region ${{ matrix.region }}"
 
       - name: Deploy CFN Stack for ${{ matrix.region }}
+        if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/${{ matrix.region }}/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == matrix.region) }}
         run: echo "CFN Stack successfully deployed for region ${{ matrix.region }}"
