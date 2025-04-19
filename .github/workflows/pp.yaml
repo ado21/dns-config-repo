@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/check-modified-files.yaml
 
   get-artifact-eu-west-1:
-    name: Get Artifact (eu-west-1)
+    name: eu-west-1
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
@@ -29,7 +29,7 @@ jobs:
       region: eu-west-1
 
   get-artifact-eu-central-1:
-    name: Get Artifact (eu-central-1)
+    name: eu-central-1
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/eu-central-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-central-1') }}
@@ -37,7 +37,7 @@ jobs:
       region: eu-central-1
 
   get-artifact-us-west-2:
-    name: Get Artifact (us-west-2)
+    name: us-west-2
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'us-west-2') }}
