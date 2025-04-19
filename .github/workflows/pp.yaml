@@ -68,7 +68,7 @@ jobs:
           echo "Deployer role successfully created ..."
   deploy-cfn-stack-eu-west-1:
     runs-on: ubuntu-latest
-    needs: [create-deployer-role-eu-west-2]
+    needs: [create-deployer-role-eu-west-1]
     steps:
       - name: Deploy Stack
         run: |
