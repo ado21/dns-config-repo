@@ -9,7 +9,6 @@ on:
 
 jobs:
   create-role:
-    name: Create Role (${{ inputs.region }})
     runs-on: ubuntu-latest
     steps:
       - name: Create the deployer role for ${{ inputs.region }}
