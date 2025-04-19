@@ -71,14 +71,14 @@ jobs:
     with:
       region: eu-west-1
 
-deploy-cfn-stack-eu-central-1:
-  name: eu-central-1
-  uses: ./.github/workflows/deploy-cfn-stack.yaml
-  with:
-    region: eu-central-1
+  deploy-cfn-stack-eu-central-1:
+    name: eu-central-1
+    uses: ./.github/workflows/deploy-cfn-stack.yaml
+    with:
+      region: eu-central-1
 
-deploy-cfn-stack-us-west-2:
-  name: us-west-2
-  uses: ./.github/workflows/deploy-cfn-stack.yaml
-  with:
-    region: us-west-2
+  deploy-cfn-stack-us-west-2:
+    name: us-west-2
+    uses: ./.github/workflows/deploy-cfn-stack.yaml
+    with:
+      region: us-west-2
