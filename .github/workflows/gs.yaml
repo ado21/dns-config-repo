@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/check-modified-files.yaml
 
   get-artifact-eu-west-1:
-    name: eu-west-1
+    name: prod-euw1
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'GS/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
@@ -29,7 +29,7 @@ jobs:
       region: eu-west-1
 
   get-artifact-eu-central-1:
-    name: eu-central-1
+    name: prod-euc1
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'GS/eu-central-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-central-1') }}
@@ -37,51 +37,75 @@ jobs:
       region: eu-central-1
 
   get-artifact-us-west-2:
-    name: us-west-2
+    name: prod-usw2
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'GS/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'us-west-2') }}
     with:
       region: us-west-2
+  
+  get-artifact-eu-west-1-plint:
+    name: plint-euw1
+    uses: ./.github/workflows/retrieve-artifact.yaml
+    needs: [check-modified-files]
+    if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'GS/plint/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
+    with:
+      region: eu-west-1
 
   create-deployer-role-eu-west-1:
-    name: eu-west-1
+    name: prod-euw1
     uses: ./.github/workflows/create-deployer-role.yaml
     needs: [get-artifact-eu-west-1]
     with:
       region: eu-west-1
 
   create-deployer-role-eu-central-1:
-    name: eu-central-1
+    name: prod-euc1
     uses: ./.github/workflows/create-deployer-role.yaml
     needs: [get-artifact-eu-central-1]
     with:
       region: eu-central-1
 
   create-deployer-role-us-west-2:
-    name: us-west-2
+    name: prod-usw2
     uses: ./.github/workflows/create-deployer-role.yaml
     needs: [get-artifact-us-west-2]
     with:
       region: us-west-2
+  
+  create-deployer-role-eu-west-1-plint:
+    name: plint-euw1
+    uses: ./.github/workflows/create-deployer-role.yaml
+    needs: [get-artifact-eu-west-1-plint]
+    with:
+      region: eu-west-1
 
   deploy-cfn-stack-eu-west-1:
-    name: eu-west-1
+    name: prod-euw1
     needs: create-deployer-role-eu-west-1
     uses: ./.github/workflows/deploy-cfn-stack.yaml
     with:
       region: eu-west-1
 
   deploy-cfn-stack-eu-central-1:
-    name: eu-central-1
+    name: prod-euc1
     needs: create-deployer-role-eu-central-1
     uses: ./.github/workflows/deploy-cfn-stack.yaml
     with:
       region: eu-central-1
 
   deploy-cfn-stack-us-west-2:
-    name: us-west-2
+    name: prod-usw2
     needs: create-deployer-role-us-west-2
     uses: ./.github/workflows/deploy-cfn-stack.yaml
     with:
       region: us-west-2
+  
+  deploy-cfn-stack-eu-west-1-plint:
+    name: plint-euw1
+    needs: create-deployer-role-eu-west-1-plint
+    uses: ./.github/workflows/deploy-cfn-stack.yaml
+    with:
+      region: eu-west-1
+  
+  
