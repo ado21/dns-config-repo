@@ -67,18 +67,21 @@ jobs:
 
   deploy-cfn-stack-eu-west-1:
     name: eu-west-1
+    needs: create-deployer-role-eu-west-1
     uses: ./.github/workflows/deploy-cfn-stack.yaml
     with:
       region: eu-west-1
 
   deploy-cfn-stack-eu-central-1:
     name: eu-central-1
+    needs: create-deployer-role-eu-central-1
     uses: ./.github/workflows/deploy-cfn-stack.yaml
     with:
       region: eu-central-1
 
   deploy-cfn-stack-us-west-2:
     name: us-west-2
+    needs: create-deployer-role-us-west-2
     uses: ./.github/workflows/deploy-cfn-stack.yaml
     with:
       region: us-west-2
