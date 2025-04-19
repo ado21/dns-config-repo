@@ -33,7 +33,7 @@ jobs:
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/eu-central-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-central-1') }}
     steps:
-      - name: Hello world from eu-central-1
+      - name: Get S3 Artifact
         run: echo "Artifact Successfully retrieved ..."
 
   get-artifact-us-west-2:
@@ -41,7 +41,7 @@ jobs:
     needs: [check-modified-files]
     if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'PP/us-west-2/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'us-west-2') }}
     steps:
-      - name: Hello world from us-west-2
+      - name: Get S3 Artifact
         run: echo "Artifact Successfully retrieved ..."
 
   create-deployer-role-eu-west-1:
