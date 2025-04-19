@@ -9,10 +9,11 @@ on:
       region:
         description: 'Select the region to run'
         required: true
-        default: 'eu-west-1'
+        default: 'eu-west-1 (plint)'
         type: choice
         options:
           - 'eu-west-1'
+          - 'eu-west-1 (plint)'
           - 'eu-central-1'
           - 'us-west-2'
 
@@ -48,7 +49,7 @@ jobs:
     name: plint-euw1
     uses: ./.github/workflows/retrieve-artifact.yaml
     needs: [check-modified-files]
-    if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'GS/plint/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1') }}
+    if: ${{ contains(needs.check-modified-files.outputs.modified_files, 'GS/plint/eu-west-1/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.region == 'eu-west-1 (plint)') }}
     with:
       region: eu-west-1
 
