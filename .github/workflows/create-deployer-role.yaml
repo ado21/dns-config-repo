@@ -1,0 +1,16 @@
+name: Create Deployer Role
+
+on:
+  workflow_call:
+    inputs:
+      region:
+        required: true
+        type: string
+
+jobs:
+  create-role:
+    name: Create Role (${{ inputs.region }})
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create the deployer role for ${{ inputs.region }}
+        run: echo "Deployer role successfully created for ${{ inputs.region }} ..."
